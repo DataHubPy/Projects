@@ -1,0 +1,42 @@
+import os #It´s a default library in python+
+import pandas as pd
+
+folder = ("D:\python\Estadisticas LEC") #Folder directory
+files = os.listdir(folder) #Used to list the files in the folder
+
+
+files #Used to show the files in the folder
+
+filesxlsx = [] #Empty List
+
+for i in files:
+    if i.endswith(".xlsx"):
+        filesxlsx.append(i) #Append is used for add elemts to the end of the list
+        print("The file", i ,"was added")
+    elif i.endswith(".csv"):
+        print("The file", i ,"was excluded")
+
+filesxlsx #Show the list with the files added
+
+for s in filesxlsx:
+    if s == "Estadisticas 2022.xlsx":
+        df2 = pd.ExcelFile(folder + "\\" + s)
+        sheets = df2.sheet_names #This define the list sheets 
+        
+sheets #This print sheets list of the excel
+
+sheets[0] #This uses the first position of the list, in this case it is 'Champions_Data'
+
+folder + "\\" + s #This is the directory of the excel file, this is the correct way to write them
+
+#If you know the sheet name you can do this instanly and put the sheet name in the parameter
+for s in filesxlsx:
+    if s == "Estadisticas 2022.xlsx":
+        df = pd.read_excel(folder + "\\" + s , sheet_name='Champions_Data')
+    else:
+        print("The file", s , "was excluded")
+
+#First I excluded one excel of the two in my list
+df.dtypes #This is used to see the format of the columns in my dataframe. I called my dataframe "df"
+
+df.head(10) #This is used to see the first ten 10 rows of the dataframe
